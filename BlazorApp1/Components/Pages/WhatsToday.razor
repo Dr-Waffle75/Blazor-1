@@ -1,0 +1,14 @@
+@page "/WhatsToday"
+@rendermode InteractiveServer
+
+
+
+<button class="btn btn-primary" @onclick ="() => message = DateTime.Now.ToString()">Whats Today?</button>
+<p role="status">@message</p>
+
+@code 
+{
+   
+    string message = "Who Cares?";
+    
+}

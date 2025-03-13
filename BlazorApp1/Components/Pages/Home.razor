@@ -1,0 +1,80 @@
+﻿@page "/"
+@rendermode InteractiveServer
+<PageTitle>Home Page</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@{
+    var amount = 1+1;
+}
+
+
+
+<p>Random Number: @randInt()</p>
+
+<div style="background-color:@color" @onmouseover="mouseOver" @onmouseout="mouseOut">Name:</div>
+<input @onchange="OnChange">
+<p>@text</p>
+
+<p>Address:</p>
+<input @oninput="OnInput">
+<p>@text2</p>
+
+
+
+
+<Counter IncrementAmount="amount" />
+
+<Breakfast />
+
+<WhatsToday />
+
+<Alphabet />
+
+<BMICalc />
+
+<Weather />  
+
+
+
+@code{
+
+    string text = "";
+    string text2 = "";
+    string color = "lawngreen";
+    int num = 2;
+
+    string[] colors = ["purple","pink","red","blue","green"];
+
+
+    private int randInt()
+    {
+
+        Random rnd = new Random();
+        return rnd.Next(1,27);
+
+    }
+
+
+    private void OnChange(ChangeEventArgs e)
+    {
+        text = (string)e.Value!;
+    }
+    private void OnInput(ChangeEventArgs e)
+    {
+        text2 = (string)e.Value!;
+    }
+
+    private void mouseOut(MouseEventArgs args)
+    {
+        Random rand = new Random();
+        num = rand.Next(0,5);
+        color = colors[num];
+    }
+    private void mouseOver(MouseEventArgs args)
+    {
+        color = "deeppink";
+    }
+}

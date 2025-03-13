@@ -1,0 +1,67 @@
+@page "/WhatsToday"
+@rendermode InteractiveServer
+
+<div class="d-flex justify-content-center">
+<h1>BMI Calculator</h1>
+</div>
+
+
+
+<div class="d-flex justify-content-center">
+<h3>Input Height in Feet:</h3>
+<input @onchange="setFeet" @onmouseout="calculateBMI">
+</div>
+
+
+
+<div class="d-flex justify-content-center">
+<h3>Input Height in Inches:</h3>
+<input @onchange="setInches" @onmouseout="calculateBMI">
+</div>
+
+
+
+<div class="d-flex justify-content-center">
+<h3>Input weight:</h3>
+<input @onchange="setWeight" @onmouseout="calculateBMI">
+</div>
+
+
+
+<div class="d-flex justify-content-center">
+<h3>BMI: @BMI</h3>
+</div>
+
+
+@code
+{
+    public int feet = 0;
+    public int inches = 0;
+    public int weight = 0;
+
+    public double BMI = 0;
+
+    public void setFeet(ChangeEventArgs e)
+    {
+        feet = Int32.Parse((string)e.Value!);
+    }
+
+    public void setInches(ChangeEventArgs e)
+    {
+        inches = Int32.Parse((string)e.Value!);
+    }
+
+    public void setWeight(ChangeEventArgs e)
+    {
+        weight = Int32.Parse((string)e.Value!);
+    }
+    public void calculateBMI()
+    {
+        if(feet == 0 || inches == 0 || weight == 0)
+            BMI = 0;
+        else
+            BMI = weight / Math.Pow(((feet * 12) + inches),2) * 703;
+    }
+//weight (pounds) / [height (in)]2 x 703
+
+}

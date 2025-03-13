@@ -1,0 +1,39 @@
+﻿@page "/shoppinglist"
+@rendermode InteractiveServer
+
+<h1>Shopping List</h1>
+<h3>Items Left: (@shoppingList.Count(t => !t.bought))</h3>
+
+<ul>
+    @foreach (var item in shoppingList)
+    {
+        <li>
+            <input type="checkbox" @bind="item.bought">
+            <input @bind="item.productName">
+        </li>
+    }
+</ul>
+
+<input @bind="newItem">
+
+<button @onclick="AddTodo">Add item</button>
+@code 
+{
+
+    List<ShoppingItem> shoppingList = new List<ShoppingItem>();
+
+    string newItem = "";
+    public class ShoppingItem
+    {
+        public string productName { get; set; }
+        public bool bought { get; set; }
+    }
+    private void AddTodo(MouseEventArgs args)
+    {
+        if (!string.IsNullOrWhiteSpace(newItem))
+        {
+            shoppingList.Add(new ShoppingItem { productName = newItem});
+            newItem = "";
+        }
+    }
+}

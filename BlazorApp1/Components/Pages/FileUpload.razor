@@ -1,0 +1,171 @@
+﻿@page "/fileupload"
+@rendermode InteractiveServer
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<PageTitle>Blazor Server File Upload</PageTitle>
+
+<h1>Blazor Server File Upload</h1>
+
+<div style="margin-bottom: 20px; display: flex;">
+    <div>Select your file:</div>
+    <InputFile OnChange="FileUploaded" />
+</div>
+
+<h2>Selected file</h2>
+<div>
+    <div>File name: @FileName</div>
+    <div>File size: @FileSize.ToString("n0") bytes</div>
+    <div>File type: @FileType</div>
+    <div>Last modified: @LastModified</div>
+</div>
+<h2>Length of Master List: @masterList.Count()</h2>
+
+@if(createdDictionary)
+    {
+    <table>
+        <tr>
+            <th>Reader ID</th>
+            <th>Reader Name</th>
+            <th>Number of reader events</th>
+        </tr>
+        <tbody>
+        @foreach(KeyValuePair<string, List<ReaderEvent>> i in dic)
+            {
+                <tr>
+                    <td>@i.Key</td>
+                    <td>@i.Value[0].reader</td>
+                    <td>@i.Value.Count()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div>Error: @ErrorMessage</div>
+}
+
+
+@code {
+    public bool createdDictionary = false;
+    public string FileName { get; set; } = "";
+    public long FileSize { get; set; }
+    public string FileType { get; set; } = "";
+    public DateTimeOffset LastModified { get; set; }
+    public string ErrorMessage { get; set; } = "";
+    private List<ReaderEvent> masterList = new List<ReaderEvent>();
+    private Dictionary<string, List<ReaderEvent>> dic = new Dictionary<string, List<ReaderEvent>>();
+
+    const int MAX_FILESIZE = 10000000; // 2 MB
+
+
+    // Handles a single file
+
+     public async Task FileUploaded(InputFileChangeEventArgs e)
+     {
+         var browserFile = e.File;
+
+         if (browserFile != null)
+         {
+             FileSize = browserFile.Size;
+             FileType = browserFile.ContentType;
+             FileName = browserFile.Name;
+             LastModified = browserFile.LastModified;
+
+             try
+             { //save and upload file to the disk
+                 var fileStream = browserFile.OpenReadStream(MAX_FILESIZE);
+                 var destinationStream = new FileStream(FileName, FileMode.Create);
+                 await fileStream.CopyToAsync(destinationStream);
+                 destinationStream.Close();
+
+                //create stream reader and begin reading lines
+                 StreamReader sr = new StreamReader(FileName);
+                 string? line = sr.ReadLine();
+                 while((line = sr.ReadLine()) != null)
+                 {
+                    string[] data = line.Split(",");
+                    masterList.Add(new ReaderEvent(data[0], data[1], data[2], data[3], data[4], data[5]));
+                    
+                 }
+                 makeDictionary(masterList);
+                 
+             }
+             catch (Exception exception)
+             {
+                 ErrorMessage = exception.Message;
+             }
+         }
+     }
+     
+     public Dictionary<string, List<ReaderEvent>> makeDictionary(List<ReaderEvent> bigList)
+        {
+            foreach(ReaderEvent r in bigList)
+            {
+                if(!dic.ContainsKey(r.getReaderID()))
+                {
+                    dic.Add(r.getReaderID(), new List<ReaderEvent>());
+                }
+                dic[r.getReaderID()].Add(r);
+                
+            }
+            createdDictionary = true;
+            return dic;
+        }
+
+     
+
+     public class ReaderEvent
+     {
+        public string date;
+        public string site;
+        public string reader;
+        public string hash;
+        public string devid;
+        public string machine;
+
+
+        public ReaderEvent(string reportedDate, string reportedSite, string reportedReader, string reportedHash, string reportedDevid, string reportedMachine)
+        {
+            date = reportedDate;
+            site = reportedSite;
+            reader = reportedReader;
+            hash = reportedHash;
+            devid = reportedDevid;
+            machine = reportedMachine;
+
+        }
+        public string getReaderID() => devid + machine;
+       
+
+        public string getDate() => date;
+        public string getSite() => site;
+        public string getReader() => reader;
+        public string getHash() => hash;
+        public string getDevid() => devid;
+        public string getMachine() => machine;
+
+
+
+     }
+
+  
+}

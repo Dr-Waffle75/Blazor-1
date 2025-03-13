@@ -1,0 +1,34 @@
+@page "/Alphabet"
+@rendermode InteractiveServer
+
+
+@code 
+{
+
+    int counter = 1;
+    
+    int rand = 5;
+    string[] alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+    public void subset()
+    {
+        counter++;
+        Random rnd = new Random();
+        rand = rnd.Next(1,27);
+        
+       
+    }
+
+}
+
+<button class="btn btn-primary" @onclick="subset">Alphabet</button>
+
+@if (counter % 2 == 0)
+{
+    <ol>
+    @for (int i = 0; i < rand; i++) {
+        <li>@alphabet[i]</li>
+    }
+    </ol>
+}
+
