@@ -77,3 +77,4 @@ c:\Users\oaknu\Desktop\Capstone\Blazor 1\BlazorApp1\obj\Debug\net9.0\BlazorApp1.
 c:\Users\oaknu\Desktop\Capstone\Blazor 1\BlazorApp1\obj\Debug\net9.0\ref\BlazorApp1.dll
 c:\Users\oaknu\Desktop\Capstone\Blazor 1\BlazorApp1\obj\Debug\net9.0\compressed\ysu4imbah3-uin0erjt0i.gz
 c:\Users\oaknu\Desktop\Capstone\Blazor 1\BlazorApp1\obj\Debug\net9.0\compressed\uxxncn5hnr-uin0erjt0i.gz
+c:\Users\oaknu\Desktop\Capstone\Blazor 1\BlazorApp1\obj\Debug\net9.0\BlazorApp1.sourcelink.json

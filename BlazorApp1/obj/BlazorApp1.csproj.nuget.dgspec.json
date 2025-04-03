@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj": {}
+    "c:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj": {
+    "c:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj",
+        "projectUniqueName": "c:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj",
         "projectName": "BlazorApp1",
-        "projectPath": "C:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj",
+        "projectPath": "c:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\BlazorApp1.csproj",
         "packagesPath": "C:\\Users\\oaknu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\obj\\",
+        "outputPath": "c:\\Users\\oaknu\\Desktop\\Capstone\\Blazor 1\\BlazorApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\oaknu\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
